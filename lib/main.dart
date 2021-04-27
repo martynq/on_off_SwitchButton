@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(),
       home: const AnimatedToggleButton(
-        onColor: Colors.green,
-        offColor: Colors.orange,
+        onColor: Colors.blue,
+        offColor: Colors.red,
         toggleColor: Colors.white,
         onText: 'YES',
         offText: 'NO',
@@ -174,7 +174,7 @@ class _AnimatedToggleButtonState extends State<AnimatedToggleButton> {
     );
   }
 
-  // ignore: always_declare_return_types, type_annotate_public_apis
+  ignore: always_declare_return_types, type_annotate_public_apis
   void toggleButton() {
     setState(() {
       toggleValue = !toggleValue;
