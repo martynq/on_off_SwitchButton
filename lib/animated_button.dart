@@ -32,6 +32,20 @@ class AnimatedToggleButton extends StatefulWidget {
     this.onOffFunction,
   }) : super(key: key);
 
+  factory AnimatedToggleButton.greenOrange() => const AnimatedToggleButton(
+        onColor: Colors.green,
+        offColor: Colors.orange,
+        toggleColor: Colors.white,
+        onText: 'YES',
+        offText: 'NO',
+        boxBorderRadius: 5.0,
+        toggleBorderRadius: 5.0,
+        animatedContainerWidth: 80.0,
+        animatedContainerHeight: 34.0,
+        toggleSize: 25.0,
+        animationMillisecondDuration: 100,
+      );
+
   @override
   _AnimatedToggleButtonState createState() => _AnimatedToggleButtonState();
 }
@@ -49,7 +63,7 @@ class _AnimatedToggleButtonState extends State<AnimatedToggleButton> {
           children: <Widget>[
             AnimatedContainer(
               duration:
-              Duration(milliseconds: widget.animationMillisecondDuration),
+                  Duration(milliseconds: widget.animationMillisecondDuration),
               height: widget.animatedContainerHeight,
               width: widget.animatedContainerWidth,
               decoration: BoxDecoration(
@@ -88,7 +102,7 @@ class _AnimatedToggleButtonState extends State<AnimatedToggleButton> {
                     top: 1.0,
                     left: toggleValue ? widget.animatedContainerWidth / 2 : 0.0,
                     right:
-                    toggleValue ? 0.0 : widget.animatedContainerWidth / 2,
+                        toggleValue ? 0.0 : widget.animatedContainerWidth / 2,
                     curve: Curves.easeIn,
                     duration: Duration(
                         milliseconds: widget.animationMillisecondDuration),
@@ -106,35 +120,35 @@ class _AnimatedToggleButtonState extends State<AnimatedToggleButton> {
                         },
                         child: toggleValue
                             ? Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: GestureDetector(
-                            onTap: widget.onONFunction,
-                            child: Container(
-                              width: widget.toggleSize,
-                              height: widget.toggleSize,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      widget.toggleBorderRadius),
-                                  color: widget.toggleColor),
-                              key: UniqueKey(),
-                            ),
-                          ),
-                        )
+                                padding: const EdgeInsets.all(4.0),
+                                child: GestureDetector(
+                                  onTap: widget.onONFunction,
+                                  child: Container(
+                                    width: widget.toggleSize,
+                                    height: widget.toggleSize,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            widget.toggleBorderRadius),
+                                        color: widget.toggleColor),
+                                    key: UniqueKey(),
+                                  ),
+                                ),
+                              )
                             : Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: GestureDetector(
-                            onTap: widget.onOffFunction,
-                            child: Container(
-                              width: widget.toggleSize,
-                              height: widget.toggleSize,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      widget.toggleBorderRadius),
-                                  color: widget.toggleColor),
-                              key: UniqueKey(),
-                            ),
-                          ),
-                        ),
+                                padding: const EdgeInsets.all(4.0),
+                                child: GestureDetector(
+                                  onTap: widget.onOffFunction,
+                                  child: Container(
+                                    width: widget.toggleSize,
+                                    height: widget.toggleSize,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            widget.toggleBorderRadius),
+                                        color: widget.toggleColor),
+                                    key: UniqueKey(),
+                                  ),
+                                ),
+                              ),
                       ),
                     ),
                   ),
