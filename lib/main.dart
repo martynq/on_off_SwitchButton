@@ -163,8 +163,6 @@ class _AnimatedToggleButtonState extends State<AnimatedToggleButton> {
                                     ),
                                   ),
                                 )
-                          // ? Text('YES', style: TextStyle(color: yesColor))
-                          // : Text('NO', style: TextStyle(color: noColor)),
                           ),
                     ),
                   )
