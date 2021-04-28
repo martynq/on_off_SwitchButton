@@ -32,7 +32,7 @@ class AnimatedToggleButton extends StatefulWidget {
         offText: 'OFF',
          initialValue: true,
       );
-  factory AnimatedToggleButton.yesNO({@required Function(bool) onToggled}) => AnimatedToggleButton(
+  factory AnimatedToggleButton.yesNo({@required Function(bool) onToggled}) => AnimatedToggleButton(
         onColor: Colors.green,
         offColor: Colors.orange,
         toggleColor: Colors.white,

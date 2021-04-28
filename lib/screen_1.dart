@@ -18,7 +18,7 @@ class _Screen1State extends State<Screen1> {
           width: 20,
           height: 20,
         ),
-        AnimatedToggleButton.yesNO(
+        AnimatedToggleButton.yesNo(
           onToggled: (value) {},
         ),
       ],
