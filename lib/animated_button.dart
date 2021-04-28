@@ -9,7 +9,7 @@ class AnimatedToggleButton extends StatefulWidget {
   final bool initialValue;
   final void Function() onToggle;
 
-  const AnimatedToggleButton({
+   AnimatedToggleButton({
     @required this.onColor,
     @required this.offColor,
     @required this.onText,
@@ -19,13 +19,13 @@ class AnimatedToggleButton extends StatefulWidget {
     @required this.onToggle,
   })  : assert(onColor != null),
         assert(offColor != null),
-        assert(onText != null),
-        assert(offText != null),
-        assert(toggleColor != null);
+        assert(onText != null && onText.isNotEmpty),
+        assert(offText != null && offText.isNotEmpty),
+        assert(toggleColor != null),
+        assert(initialValue != null),
+        assert(onToggle != null);
 
-  //    assert(onToggle != null);
-
-  factory AnimatedToggleButton.onOff({@required Function(bool) onToggled}) => const AnimatedToggleButton(
+  factory AnimatedToggleButton.onOff({@required Function(bool) onToggled}) => AnimatedToggleButton(
         onColor: Colors.green,
         offColor: Colors.orange,
         toggleColor: Colors.white,
@@ -33,7 +33,7 @@ class AnimatedToggleButton extends StatefulWidget {
         offText: 'OFF',
          initialValue: true,
       );
-  factory AnimatedToggleButton.yesNO({@required Function(bool) onToggled}) => const AnimatedToggleButton(
+  factory AnimatedToggleButton.yesNO({@required Function(bool) onToggled}) => AnimatedToggleButton(
         onColor: Colors.green,
         offColor: Colors.orange,
         toggleColor: Colors.white,
