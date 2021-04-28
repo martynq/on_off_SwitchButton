@@ -6,44 +6,29 @@ class AnimatedToggleButton extends StatefulWidget {
   final String onText;
   final String offText;
   final Color toggleColor;
-  final double boxBorderRadius;
-  final double toggleBorderRadius;
-  final double animatedContainerWidth;
-  final double animatedContainerHeight;
-  final double toggleSize;
-  final int animationMillisecondDuration;
-  final void Function() onONFunction;
-  final void Function() onOffFunction;
+  final void Function() onToggle;
 
   const AnimatedToggleButton({
-    Key key,
-    this.onColor,
-    this.offColor,
-    this.onText,
-    this.offText,
-    this.toggleColor,
-    this.boxBorderRadius,
-    this.toggleBorderRadius,
-    this.animatedContainerWidth,
-    this.animatedContainerHeight,
-    this.toggleSize,
-    this.animationMillisecondDuration,
-    this.onONFunction,
-    this.onOffFunction,
-  }) : super(key: key);
+    @required this.onColor,
+    @required this.offColor,
+    @required this.onText,
+    @required this.offText,
+    @required this.toggleColor,
+    @required this.onToggle,
+  })  : assert(onColor != null),
+        assert(offColor != null),
+        assert(onText != null),
+        assert(offText != null),
+        assert(toggleColor != null);
 
-  factory AnimatedToggleButton.greenOrange() => const AnimatedToggleButton(
+  //    assert(onToggle != null);
+
+  factory AnimatedToggleButton.onOff({@required Function(bool) onToggled}) => const AnimatedToggleButton(
         onColor: Colors.green,
         offColor: Colors.orange,
         toggleColor: Colors.white,
         onText: 'YES',
         offText: 'NO',
-        boxBorderRadius: 5.0,
-        toggleBorderRadius: 5.0,
-        animatedContainerWidth: 80.0,
-        animatedContainerHeight: 34.0,
-        toggleSize: 25.0,
-        animationMillisecondDuration: 100,
       );
 
   @override
@@ -51,119 +36,103 @@ class AnimatedToggleButton extends StatefulWidget {
 }
 
 class _AnimatedToggleButtonState extends State<AnimatedToggleButton> {
-  bool toggleValue = false;
+  bool toggleValue = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            AnimatedContainer(
-              duration:
-                  Duration(milliseconds: widget.animationMillisecondDuration),
-              height: widget.animatedContainerHeight,
-              width: widget.animatedContainerWidth,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(widget.boxBorderRadius),
-                color: toggleValue ? widget.onColor : widget.offColor,
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.all(8.0),
-                    height: widget.animatedContainerHeight,
-                    width: widget.animatedContainerWidth,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          widget.onText,
-                          style: TextStyle(
-                              fontSize: 15.0,
-                              color: toggleValue
-                                  ? widget.toggleColor
-                                  : widget.offColor),
-                        ),
-                        Text(
-                          widget.offText,
-                          style: TextStyle(
-                              fontSize: 15.0,
-                              color: toggleValue
-                                  ? widget.onColor
-                                  : widget.toggleColor),
-                        ),
-                      ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 100),
+          height: 34.0,
+          width: 80.0,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5.0),
+            color: toggleValue ? widget.onColor : widget.offColor,
+          ),
+          child: Stack(
+            children: <Widget>[
+              SizedBox(
+                height: 34.0,
+                width: 80.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text(
+                      widget.onText,
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          color: toggleValue
+                              ? widget.toggleColor
+                              : widget.offColor),
                     ),
-                  ),
-                  AnimatedPositioned(
-                    top: 1.0,
-                    left: toggleValue ? widget.animatedContainerWidth / 2 : 0.0,
-                    right:
-                        toggleValue ? 0.0 : widget.animatedContainerWidth / 2,
-                    curve: Curves.easeIn,
-                    duration: Duration(
-                        milliseconds: widget.animationMillisecondDuration),
-                    child: InkWell(
-                      onTap: toggleButton,
-                      child: AnimatedSwitcher(
-                        duration: Duration(
-                            milliseconds: widget.animationMillisecondDuration),
-                        transitionBuilder:
-                            (Widget child, Animation<double> animation) {
-                          return RotationTransition(
-                            turns: animation,
-                            child: child,
-                          );
-                        },
-                        child: toggleValue
-                            ? Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: GestureDetector(
-                                  onTap: widget.onONFunction,
-                                  child: Container(
-                                    width: widget.toggleSize,
-                                    height: widget.toggleSize,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            widget.toggleBorderRadius),
-                                        color: widget.toggleColor),
-                                    key: UniqueKey(),
-                                  ),
-                                ),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: GestureDetector(
-                                  onTap: widget.onOffFunction,
-                                  child: Container(
-                                    width: widget.toggleSize,
-                                    height: widget.toggleSize,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            widget.toggleBorderRadius),
-                                        color: widget.toggleColor),
-                                    key: UniqueKey(),
-                                  ),
-                                ),
+                    Text(
+                      widget.offText,
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          color: toggleValue
+                              ? widget.onColor
+                              : widget.toggleColor),
+                    ),
+                  ],
+                ),
+              ),
+              AnimatedPositioned(
+                top: 1.0,
+                left: toggleValue ? 80.0 / 2 : 0.0,
+                right: toggleValue ? 0.0 : 80.0 / 2,
+                curve: Curves.easeIn,
+                duration: const Duration(milliseconds: 100),
+                child: InkWell(
+                  onTap: _toggleButton,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 100),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      return RotationTransition(
+                        turns: animation,
+                        child: child,
+                      );
+                    },
+                    child: toggleValue
+                        ? Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: GestureDetector(
+                              onTap: widget.onToggle,
+                              child: Container(
+                                width: 25,
+                                height: 25,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    color: widget.toggleColor),
                               ),
-                      ),
-                    ),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: GestureDetector(
+                              onTap: widget.onToggle,
+                              child: Container(
+                                width: 25,
+                                height: 25,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    color: widget.toggleColor),
+                              ),
+                            ),
+                          ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 
-  void toggleButton() {
-    setState(() {
-      toggleValue = !toggleValue;
-    });
-  }
+  void _toggleButton() => setState(() {
+        toggleValue = !toggleValue;
+      });
 }

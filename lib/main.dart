@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yes_no_app/animated_button.dart';
+import 'package:yes_no_app/screen_1.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,6 +10,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(), home: AnimatedToggleButton.greenOrange());
+      theme: ThemeData(),
+      title: 'Button',
+      home: Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Screen1(),
+        ),
+      ),
+    );
   }
 }
