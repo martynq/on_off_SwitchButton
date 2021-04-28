@@ -7,12 +7,18 @@ class Screen1 extends StatefulWidget {
 }
 
 class _Screen1State extends State<Screen1> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         AnimatedToggleButton.onOff(
+          onToggled: (value) {},
+        ),
+        const SizedBox(
+          width: 20,
+          height: 20,
+        ),
+        AnimatedToggleButton.yesNO(
           onToggled: (value) {},
         ),
       ],

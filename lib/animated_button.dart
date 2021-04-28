@@ -6,6 +6,7 @@ class AnimatedToggleButton extends StatefulWidget {
   final String onText;
   final String offText;
   final Color toggleColor;
+  final bool initialValue;
   final void Function() onToggle;
 
   const AnimatedToggleButton({
@@ -14,6 +15,7 @@ class AnimatedToggleButton extends StatefulWidget {
     @required this.onText,
     @required this.offText,
     @required this.toggleColor,
+    @required this.initialValue,
     @required this.onToggle,
   })  : assert(onColor != null),
         assert(offColor != null),
@@ -27,8 +29,17 @@ class AnimatedToggleButton extends StatefulWidget {
         onColor: Colors.green,
         offColor: Colors.orange,
         toggleColor: Colors.white,
+        onText: 'ON',
+        offText: 'OFF',
+         initialValue: true,
+      );
+  factory AnimatedToggleButton.yesNO({@required Function(bool) onToggled}) => const AnimatedToggleButton(
+        onColor: Colors.green,
+        offColor: Colors.orange,
+        toggleColor: Colors.white,
         onText: 'YES',
         offText: 'NO',
+        initialValue: true,
       );
 
   @override
